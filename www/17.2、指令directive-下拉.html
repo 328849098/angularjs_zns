@@ -1,0 +1,41 @@
+<!doctype html>
+<html ng-app='myApp' ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+<script src="angular.min.js"></script>
+<script>
+//directive 指令/自定义组件/重用
+//指令出现在哪，内容就在哪
+//v.indexOf() 查找
+var app=angular.module('myApp',[]);
+app.directive('dropdownlist',function () {
+    return {
+        //replace:true,
+        restrict:'E',    //EACM:元素、属性、class、注释.默认EA。
+        template:'<input type="text" ng-model="str">' +
+        '<ul>' +
+            '<li ng-repeat="v in arr" ng-show="v.indexOf(str)!=-1">{{v}},{{v.indexOf(str)!=-1}}</li>' +
+        '</ul>',
+        transclude:true    //包裹、嵌入，占位符
+    };
+});
+
+app.controller('myCtrl',function ($scope) {
+    $scope.str='';
+    $scope.arr=['app','apple','news','zindex'];
+})
+</script>
+</head>
+
+<body>
+
+<dropdownlist></dropdownlist>
+<!--
+<input type="text" ng-model="str">
+<ul>
+    <li ng-repeat="v in arr" ng-show="v.indexOf(str)!=-1">{{v}},{{v.indexOf(str)!=-1}}</li>
+</ul>
+-->
+</body>
+</html>

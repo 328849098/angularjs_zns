@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//filter
+var app=angular.module('myApp',[]);
+app.controller('myCtrl',function ($scope) {
+    $scope.items=[
+        {name:'秋季新品',price:78.8,time:1496916228502},
+        {name:'2017新款发布',price:128.9,time:1496916288502},
+        {name:'优衣库冬季大促销短款羽绒服颗粒状',price:39,time:1496916226502}
+    ];
+});
+</script>
+</head>
+<body>
+<ul>
+    <li ng-repeat="item in items">
+        <h3>{{item.name}}</h3>
+        <span>{{item.price|currency:'￥'}}</span>
+        <div>{{item.time|date:'yyyy-MM-dd HH-mm-ss'}}</div>
+    </li>
+</ul>
+</body>
+</html>

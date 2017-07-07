@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="jianshu" ng-controller="newsData">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="../angular.min.js"></script>
+<script src="../angular-route.js"></script>
+<script src="news_mod.js"></script>
+<script src="app.js"></script>
+<script>
+/*
+接口使用说明
+文章列表：    类别id：categoryid    分页：page
+文章内容：
+*/
+/*封装：
+ 1.模块 module
+ 2.controller
+ 3.服务
+ 4.route
+
+ 重用：按功能划分
+ article_mod =>
+ 获取文章列表
+ 获取文章详情
+
+ category_mod =>
+ 获取分类列表
+
+ nav_mod =>
+ 获取导航列表
+
+ user_mod =>
+ 用户登录
+ 用户注册
+
+ comment_mod =>
+ 评论接口
+ 回复评论接口
+
+ index_m     <=     nav_mod + category_mod + article_mod + user_mod
+ article_m   <=     user_mod + article_mod + comment_mod
+ sign_in_m   <=     user_mod
+ */
+
+
+</script>
+</head>
+<body>
+{{a}}{{b}}
+<div ng-bind-html="b|showAsHtml"></div>
+<!-- 分类列表 begin -->
+<div>
+    <ul>
+        <li ng-repeat="item in categoryList" class="{{(item.categoryId==categoryNow)?'active':''}}">
+            <a href="javascript:;" ng-click="setCategoryNow(item.categoryId)">{{item.name}}</a>
+        </li>
+    </ul>
+</div>
+<!-- 分类列表 end -->
+
+<!-- 文章列表 begin -->
+<div>
+    <ul>
+        <li ng-repeat="item in menuList">
+            <a href="article_m.html?id={{item.articleId}}" ng-bind-html="item.title|showAsHtml"></a>
+        </li>
+    </ul>
+</div>
+<!-- 文章列表 end -->
+</body>
+</html>

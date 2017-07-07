@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script src="angular-route.js"></script>
+<script>
+/*
+ Route 路由   多视图、多controller
+ 根据url来切换视图
+*/
+var app=angular.module('myApp',['ngRoute']);
+app.config(function ($routeProvider) {    //配置
+    //alert($routeProvider);    //[object Object]
+    $routeProvider
+        .when(
+            '/user',
+            {
+                template:'<h2>用户中心</h2>'  //显示内容
+            }
+        )
+        .when(
+            '/artice',
+            {
+                template:'<p>aaa</p>'
+            }
+        )
+        .when(
+            '/setting',
+            {
+                template:'<div>weqweqwe</div>'
+            }
+        );
+});
+
+</script>
+</head>
+<body>
+<a href="#/user">用户中心</a>
+<a href="#/artice">文章列表</a>
+<a href="#/setting">配置信息</a>
+<ng-view></ng-view>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//官方：$scope,$http,$interval,$timeout
+/*自定义：
+创造依赖:所有的依赖项只会创造一次，都是共享的
+ 1.factory   工厂              - 最简单
+ 2.provider  供应者、提供者      -  强大，可以配置
+ 3.service   服务              - 类似于构造函数
+ 4.constant  常量              - 不可装饰
+ 5.value     变量
+
+修改依赖
+ decorator   装饰              - 会修改原来的依赖
+*/
+var app=angular.module('myApp',[]);
+app.factory('test',function () {
+    return {
+        a:12,
+        fn:function (num1,num2) {
+            return num1+num2;
+        }
+    };
+});
+app.factory('sum',function () {
+    return function (num1,num2) {
+            return num1+num2;
+    }
+
+});
+app.controller('myCtrl',function ($scope,test,sum) {
+    //alert(test.a);         //12
+    //alert(test.fn(12,5));  //17
+    //alert(typeof sum);     //function
+    alert(sum(7,9));         //16
+});
+
+</script>
+</head>
+<body>
+</body>
+</html>

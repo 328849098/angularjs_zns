@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//官方：$scope,$http,$interval,$timeout
+/*自定义：
+创造依赖
+1.factory   工厂              - 最简单
+2.provider  供应者、提供者      -  强大，可以配置
+3.service   服务              -类似于构造函数
+4.constant  常量              不可修改依赖 decorator
+*/
+var app=angular.module('myApp',[]);
+app.constant('VERSION','1.5.6');
+app.value('user_num',30);
+
+/*
+app.decorator('VERSION',function ($delegate) {
+    return $delegate+1;
+});
+*/
+app.decorator('user_num',function ($delegate) {
+    return $delegate+1;
+});
+app.controller('myCtrl',function ($scope,VERSION,user_num) {
+    alert(user_num);    //31
+    //alert(VERSION);     //出错,constant不可装饰
+});
+
+</script>
+</head>
+<body>
+</body>
+</html>

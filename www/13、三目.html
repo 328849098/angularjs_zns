@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.min.js"></script>
+</head>
+<body ng-init="arr=[12,5,88,93,39];">
+<!-- ?: -->
+<!-- 数组有重复的就挂了 如有两个5：arr=[12,5,88,93,39,5];-->
+<div ng-repeat="v in arr" style="{{v%2==0?'background:#f00;':''}}">{{v}}</div>
+
+<div ng-repeat="(k,v) in arr">{{k}}={{v}}</div>
+
+</body>
+</html>

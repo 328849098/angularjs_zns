@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//官方：$scope,$http,$interval,$timeout
+/*自定义：
+创造依赖
+1.factory   工厂              - 最简单
+2.provider  供应者、提供者      -  强大
+
+
+ JSON.stringify()   json变成字符串
+*/
+var app=angular.module('myApp',[]);
+app.provider('testPro',function () {
+    this.$get=function () {
+       return {
+           a:12,
+           b:5
+       }
+    };
+});
+app.controller('myCtrl',function ($scope,testPro) {
+    //alert(testPro);   //[object Object]
+    alert(JSON.stringify(testPro));   //json变成字符串   {"a":12,"b":5}
+});
+
+</script>
+</head>
+<body>
+</body>
+</html>

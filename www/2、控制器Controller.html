@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//控制器 Controller
+//一个页面里可以有多个module，一个module里可以有多个controller
+var app=angular.module('myApp',[]);
+app.controller('myCtrl',function ($scope) {
+    $scope.a=12;
+});
+
+
+
+/*
+ controller   数据操作
+ filter       过滤：文字处理
+ directive    表现层的组件（选项卡、显示更多）
+ route        分离视图、控制器
+ module       依赖
+*/
+</script>
+</head>
+<body>
+<span>{{a}}</span>
+</body>
+</html>

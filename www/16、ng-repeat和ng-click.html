@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//ng-repeat 和 事件（ng-click）不能一起用。解决办法：函数过渡。
+var app=angular.module('myApp',[]);
+app.controller('myCtrl',function ($scope) {
+    $scope.arr=[12,5,8];
+    $scope.a=0;
+    
+    $scope.fn=function (n) {
+        $scope.a=n;
+    }
+});
+</script>
+</head>
+<body>
+<input type="button" value="按钮" ng-click="a=12;">
+<input type="button" ng-repeat="v in arr" value="repeat 按钮" ng-click="a=12;">
+<input type="button" ng-repeat="v in arr" value="repeat 按钮2" ng-click="fn(14)">
+{{a}}
+
+</body>
+</html>

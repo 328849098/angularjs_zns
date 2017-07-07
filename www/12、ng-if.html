@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box1{color:#f00;}
+    </style>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<!-- ng-if false时没有源代码-->
+<div ng-init="show=false;">
+    <div ng-if="show">aaa</div>
+</div>
+
+<!-- ng-show ng-hide false时有源代码-->
+<div ng-init="show=false;">
+    <div ng-show="show">aaa</div>
+</div>
+</body>
+</html>

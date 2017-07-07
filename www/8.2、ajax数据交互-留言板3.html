@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//每次换页时都要执行"获取、显示留言"，所以把它封装起来
+/*
+1.添加一条
+    weibo.php?act=add&content=xxx
+    返回：{error:0,id:新添加内容的id,time：添加时间}
+2.获取页数
+    weibo.php?act=get_page_count
+    返回：{count:页数}
+3.获取一页数据
+    weibo.php?act=get&page=1
+    返回：{id,content,time:时间戳,acc:顶次数,ref:踩次数}
+4.顶
+    weibo.php?act=acc&id=12
+    返回：{error:0}
+5.踩
+    weibo.php?act=ref&id=12
+    返回：{error:0}
+ */
+var app=angular.module('myApp',[]);
+app.controller('myCtrl',function ($scope,$http) {
+    $scope.replies=[];
+    $scope.pages=[];
+    $scope.curPage=1;
+
+    //获取、显示留言
+    function getPage(p) {
+        //alert(p);  //页码
+        $scope.curPage=p;
+        setCur($scope.pages.length);
+
+        $http.get('weibo.php',{
+            params:{act:'get',page:p}
+        }).success(function (arr) {
+            //console.log(arr);   //[]
+            //alert(arr);         //
+            $scope.replies=arr;
+        }).error(function () {
+            alert('读取失败，请稍后重试！');
+        });
+    };
+
+    getPage(1); //默认显示第一页
+    $scope.getPage=getPage;  //把getPage赋值给$scope
+
+    //提交留言
+    $scope.submitMsg=function () {
+        //alert('a');
+        $http.get('weibo.php',{
+            params:{act:'add',content:inputText}
+        }).success(function (res) {
+            $scope.replies.unshift({      //push 往后添加
+                id:res.id,
+                content:$scope.inputText,
+                time:res.time,
+                acc:0,
+                ref:0
+            });
+
+            //每页显示6条数据
+            if($scope.replies.length>6){
+                $scope.replies.pop();
+            }
+
+            $scope.inputText='';
+        }).error(function () {
+            alert('提交失败，请稍后重试！');
+        });
+    };
+
+    //页码
+    //$scope.pages=[1,2,3];
+    /*$scope.pages=[
+        {num:1,className:''},
+        {num:2,className:'active'},
+        {num:3,className:''}
+    ];*/
+
+    //页码显示效果
+    function setCur(count) {
+        $scope.pages=[];
+
+        for(var i=1;i<=count;i++){
+            if(i==$scope.curPage){
+                $scope.pages.push({num:i,className:'active'});
+            }else{
+                $scope.pages.push({num:i,className:''});
+            }
+        }
+    }
+
+    $http.get('weibo.php',{
+        params:{act:'get_page_count'}
+    }).success(function (json) {
+        //alert(json.count);    //4
+        setCur(json.count);
+    }).error(function () {
+        alert('获取页码失败！');
+    });
+
+    //顶
+    $scope.fnAcc=function (id) {
+        //alert(id);
+        $scope.get('weibo.php',{
+            params:{act:acc,id:id}
+        }).success(function (res) {
+            for(var i=0;i<$scope.replies.length;i++){   //遍历，+1
+                if($scope.replies[i].id==id){
+                    $scope.replies[i].acc++;
+                }
+            }
+        }).error(function () {
+            alert('读取失败！');
+        });
+    };
+
+    //踩
+    $scope.fnRef=function (id) {
+        //alert(id);
+        $scope.get('weibo.php',{
+            params:{act:ref,id:id}
+        }).success(function (res) {
+            for(var i=0;i<$scope.replies.length;i++){   //遍历，+1
+                if($scope.replies[i].id==id){
+                    $scope.replies[i].ref++;
+                }
+            }
+
+        }).error(function () {
+            alert('读取失败！');
+        });
+    };
+
+});
+</script>
+</head>
+<body>
+<!-- 留言 begin -->
+<textarea ng-model="inputText"></textarea>
+<input type="button" value="提交留言" ng-click="submitMsg()">
+<!-- 留言 end -->
+
+<!-- 已留 begin -->
+<div class="noContent" ng-cloak="" ng-show="replies.length==0">暂无留言</div>
+<div class="page">
+    <a href="javascript:;" ng-repeat="item in pages" class="{{item.className}}" ng-click="getPage(item.num)">{{item.num}}</a>
+</div>
+<div class="replay" ng-repeat="relay in replies">
+    <p>{{relay.content}}</p>
+    <p>{{relay.time|date:'yyyy-MM-dd HH-mm-ss'}}</p>
+    <p><a href="javascript:;" ng-click="fnAcc(reply.id)">{{relay.acc}}</a></p>
+    <p><a href="javascript:;" ng-click="fnRef(reply.id)">{{relay.ref}}</a></p>
+    <p><a href="javascript:;">删除</a></p>
+</div>
+<!-- 已留 end -->
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//$apply 强制更新
+var app=angular.module('myApp',[]);
+app.controller('myCtrl',function ($scope,$interval) {
+    $scope.a=0;
+
+    setInterval(function () {
+        $scope.a++;
+        //console.log($scope.a);
+        $scope.$apply();
+    },50);
+
+    /*
+    $interval(function () {
+        $scope.a++;
+    },50);
+    */
+
+});
+</script>
+</head>
+<body>
+{{a}}
+</body>
+</html>

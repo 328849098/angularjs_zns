@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+<script src="angular.min.js"></script>
+<script>
+//directive 指令/自定义组件/重用
+//指令出现在哪，内容就在哪
+
+//标签   <ng-transclude></ng-transclude>
+//属性   <span ng-transclude></span>
+var app=angular.module('myApp',[]);
+app.directive('myClose',function () {
+    var json={
+        //replace:true,
+        restrict:'A',    //EACM:元素、属性、class、注释.默认EA。
+        template:'<ng-transclude></ng-transclude><a href="javascript:;">{{12*5}}X</a><span ng-transclude></span>',   //包裹、嵌入，占位符
+        transclude:true
+    };
+    return json;
+});
+</script>
+</head>
+
+<body>
+<ul>
+    <li my_close>rewrwerwer</li>
+    <li my_close>dfdsfssv</li>
+    <li my_close>dfssfssss</li>
+    <li>erwefef</li>
+    <li>qwqwewre</li>
+</ul>
+</body>
+</html>

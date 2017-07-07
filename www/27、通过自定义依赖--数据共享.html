@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+/*
+ 数据共享 -- 多个controller之间
+ 1.父子controller:
+        $scope能继承 - 复制了$scope
+        不能叫同步，只是复制
+
+ 消息机制（事件）:
+         $scope.$emit('名字',数据);           触发      自己+父级  向上发送
+         $scope.$broadcast('名字',数据);      触发      自己+子级  向下发送
+         $scope.$on('名字',数据);             接收
+ 2.无关controller
+ 用自定义依赖来存储数据
+        factory、provider、service  创建的依赖项只有一个
+*/
+var app=angular.module('myApp',[]);
+app.factory('dataCom',function () {
+    return {
+        a:0
+    };
+});
+app.controller('con1',function ($scope,dataCom) {
+    dataCom.a=12;
+});
+app.controller('con2',function ($scope,dataCom) {
+    alert(dataCom.a);    //12
+});
+
+</script>
+</head>
+<body>
+<div ng-controller="con1"></div>
+<div ng-controller="con2"></div>
+</body>
+</html>

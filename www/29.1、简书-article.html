@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="jianshu" ng-controller="article_m">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script src="angular-route.js"></script>
+<script src="controllers/app.js"></script>
+<script>
+/*
+*/
+
+
+</script>
+</head>
+<body>
+<!-- 文章 begin -->
+<div>
+    <h1 ng-bind-html="articleInfo.title|showAsHtml"></h1>
+    <div ng-bind-html="articleInfo.content|showAsHtml"></div>
+</div>
+<!-- 文章 end -->
+</body>
+</html>

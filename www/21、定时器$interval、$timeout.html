@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//$interval、$timeout 定时器
+var app=angular.module('myApp',[]);
+app.controller('myCtrl',function ($scope,$interval,$timeout) {
+    $scope.a=0;
+    $scope.b=0;
+
+    var timer=$interval(function () {
+        $scope.a++;
+
+        if($scope.a==100){
+            $interval.cancel(timer);   //关闭定时器
+        }
+    },50);
+
+    var timer2=$timeout(function () {
+        $scope.b+=2;
+    },2000);
+
+    $timeout.cancel(timer2);      //关闭定时器
+
+
+});
+</script>
+</head>
+<body>
+{{a}}<br>
+{{b}}
+</body>
+</html>

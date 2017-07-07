@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//官方：$scope,$http,$interval,$timeout
+/*自定义：
+1.factory   工厂              - 最简单
+2.provider  供应者、提供者      -  强大，可以配置
+3.service   服务              -类似于构造函数
+4.constant  常量              装饰
+5.value     变量
+*/
+var app=angular.module('myApp',[]);
+app.value('user_num',30);
+app.controller('myCtrl',function ($scope,user_num) {
+    alert(user_num);     //30
+});
+
+</script>
+</head>
+<body>
+</body>
+</html>

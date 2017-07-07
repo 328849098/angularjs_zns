@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<style>
+#div1 input{background:#ccc;}
+#div1 input.active{background:yellow;}
+#div1 div{width:300px;height:300px;border:1px solid #000;background:#ccc;}
+</style>
+<script src="angular.min.js"></script>
+<script>
+//笨
+var app=angular.module('myApp',[]);
+app.controller('myCtrl',function ($scope) {
+    $scope.now=0;
+});
+</script>
+</head>
+<body>
+<!--  -->
+<div id="div1">
+    <input type="button" value="电视" class="{{now==0?'active':''}}" ng-click="now=0;">
+    <input type="button" value="音乐" class="{{now==1?'active':''}}" ng-click="now=1;">
+    <input type="button" value="体育" class="{{now==2?'active':''}}" ng-click="now=2;">
+    <div ng-show="now==0">楚乔传</div>
+    <div ng-show="now==1">认真地老去</div>
+    <div ng-show="now==2">乔丹是个大黑哥</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//
+/*
+1.添加一条
+    weibo.php?act=add&content=xxx
+    返回：{error:0,id:新添加内容的id,time：添加时间}
+2.获取页数
+    weibo.php?act=get_page_count
+    返回：{count:页数}
+3.获取一页数据
+    weibo.php?act=get&page=1
+    返回：{id,content,time:时间戳,acc:顶次数,ref:踩次数}
+4.顶
+    weibo.php?act=acc&id=12
+    返回：{error:0}
+5.踩
+    weibo.php?act=ref&id=12
+    返回：{error:0}
+ */
+var app=angular.module('myApp',[]);
+app.controller('myCtrl',function ($scope,$http) {
+    $scope.replies=[
+        {id:1,content:'试试',time:1496920507174,acc:1,ref:5},
+        {id:2,content:'再次试试',time:1496920507174,acc:200,ref:1}
+    ];
+});
+</script>
+</head>
+<body>
+<!-- 已留 begin -->
+<div class="noContent">暂无留言</div>
+<div class="replay" ng-repeat="relay in replies">
+    <p>{{relay.content}}</p>
+    <p>{{relay.time|date:'yyyy-MM-dd HH-mm-ss'}}</p>
+    <p>{{relay.acc}}</p>
+    <p>{{relay.ref}}</p>
+    <p><a href="javascript:;">删除</a></p>
+</div>
+<!-- 已留 end -->
+</body>
+</html>

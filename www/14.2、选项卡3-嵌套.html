@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<style>
+#div1 input{background:#ccc;}
+#div1 input.active{background:yellow;}
+#div1 div{width:300px;height:300px;border:1px solid #000;background:#ccc;}
+</style>
+<script src="angular.min.js"></script>
+<script>
+//ng-repeat 和 事件(ng-click) 和 赋值 不能一起用。解决办法：函数过渡。
+var app=angular.module('myApp',[]);
+app.controller('myCtrl',function ($scope) {
+    $scope.now=0;
+
+    $scope.arr=[
+        {name:'电视',newList:[
+            {title:'楚乔传',href:'www.baidu.com'},
+            {title:'标题2',href:'www.basidu.com'},
+            {title:'标题3',href:'www.basidu.com'}
+        ]},
+        {name:'音乐',newList:[
+            {title:'认真地老去',href:'www.basidu.com'},
+            {title:'标题2-2',href:'www.basidu.com'},
+            {title:'标题2-3',href:'www.basidu.com'}
+        ]},
+        {name:'体育',newList:[
+            {title:'乔丹是个大黑哥',href:'www.basidu.com'},
+            {title:'标题3-2',href:'www.basidu.com'},
+            {title:'标题3-3',href:'www.basidu.com'}
+        ]}
+    ];
+
+    $scope.fn=function (n) {
+        $scope.now=n;
+    }
+
+});
+</script>
+</head>
+<body>
+<!-- $index:默认的下标 -->
+<div id="div1">
+    <input type="button" ng-repeat="json in arr" value="{{json.name}}" class="{{now==$index?'active':''}}" ng-click="fn($index);">
+    <div ng-repeat="json in arr" ng-show="now==$index">
+        <ul>
+            <li ng-repeat="news in json.newList"><a href="{{news.href}}">{{news.title}}</a></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

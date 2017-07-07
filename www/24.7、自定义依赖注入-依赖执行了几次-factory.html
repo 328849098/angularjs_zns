@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//官方：$scope,$http,$interval,$timeout
+/*自定义：
+创造依赖
+ 1.factory   工厂              - 最简单
+ 2.provider  供应者、提供者      -  强大，可以配置
+ 3.service   服务              - 类似于构造函数
+ 4.constant  常量              - 不可装饰
+ 5.value     变量
+
+修改依赖
+ decorator   装饰              - 会修改原来的依赖
+*/
+var app=angular.module('myApp',[]);
+app.factory('test',function () {
+    alert('factory函数执行了');
+    //只执行一次
+    return {a:12};
+});
+app.controller('myCtrl',function ($scope,test) {
+    test.a++;
+    alert(test.a);         //13
+});
+app.controller('con1',function ($scope,test) {
+    test.a++;
+    alert(test.a);         //14
+});
+app.controller('con2',function ($scope,test) {
+    test.a++;
+    alert(test.a);         //15
+});
+
+//factory函数执行了
+//13
+//14
+//15
+</script>
+</head>
+<body>
+<div ng-controller="con1"></div>
+<div ng-controller="con2"></div>
+</body>
+</html>

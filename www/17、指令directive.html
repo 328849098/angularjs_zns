@@ -1,0 +1,28 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+<script src="angular.min.js"></script>
+<script>
+//directive 指令/组件/重用
+//指令出现在哪，内容就在哪
+var app=angular.module('myApp',[]);
+app.directive('abc',function () {
+    var json={
+        replace:true,
+        restrict:'M',    //EACM:元素、属性、class、注释.默认EA。
+        template:'<span>121333</span>'
+    };
+    return json;
+});
+</script>
+</head>
+
+<body>
+<abc></abc>
+<div abc></div>
+<div class="abc"></div>
+<!-- directive:abc -->
+</body>
+</html>

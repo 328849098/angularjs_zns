@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+/*
+*/
+var app=angular.module('myApp',[]);
+app.filter('showAsHtml',function ($sce) {
+    return function (input) {
+        return $sce.trustAsHtml(input);
+    };
+});
+app.controller('myCtrl',function ($scope) {
+    $scope.a='<h2>qqqqqqqqqqqq</h2>';
+});
+
+</script>
+</head>
+<body>
+<div ng-bind-html="a|showAsHtml"></div>
+{{a|showAsHtml}}
+</body>
+</html>

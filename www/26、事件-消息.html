@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+/*
+ 数据共享 -- 多个controller之间
+ 1.父子controller:
+        $scope能继承 - 复制了$scope
+        不能叫同步，只是复制
+
+ 消息机制（事件）:
+         $scope.$emit('名字',数据);           触发      自己+父级  向上发送
+         $scope.$broadcast('名字',数据);      触发      自己+子级  向下发送
+         $scope.$on('名字',数据);             接收
+ 2.无关controller
+*/
+var app=angular.module('myApp',[]);
+app.controller('con1',function ($scope) {
+    $scope.fn=function () {
+        $scope.$broadcast('test_event',{a:12,b:5});
+    }
+});
+app.controller('con2',function ($scope) {
+    $scope.$on('test_event',function (event,data) {   //event ：事件对象，data ：数据
+        alert('我接到事件了');
+        console.log(data);
+    });
+});
+
+</script>
+</head>
+<body>
+<div ng-controller="con1">
+    <a href="javascript:;" ng-click="fn()">触发事件</a>
+    <div ng-controller="con2"></div>
+</div>
+</body>
+</html>

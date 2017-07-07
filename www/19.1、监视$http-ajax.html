@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="ajax.js"></script>
+<script src="angular.min.js"></script>
+<script>
+//$watch 监视
+//$apply 强制更新
+var app=angular.module('myApp',[]);
+app.controller('myCtrl',function ($scope,$http) {
+    $scope.result=0;
+
+    ajax({
+        url:'a.php',
+        type:'get',
+        data:{a:12,b:99},
+        success:function (res) {
+            $scope.result=res;
+            $scope.$apply();   //强制更新
+        }
+    });
+
+     /*
+    ajax('a.php?'+new Date().getTime(),function (res) {
+        $scope.result=res;
+    },function () {
+        alert('失败了');
+    });
+    */
+
+});
+</script>
+</head>
+<body>
+{{result}}
+</body>
+</html>

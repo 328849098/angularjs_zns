@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//官方：$scope,$http,$interval,$timeout
+/*自定义：
+创造依赖
+1.factory   工厂              - 最简单
+2.provider  供应者、提供者      -  强大，可以配置
+3.service   服务              -类似于构造函数
+*/
+var app=angular.module('myApp',[]);
+app.service('testServ',function () {
+    this.a=12;
+});
+app.controller('myCtrl',function ($scope,testServ) {
+    //alert(testServ);       //[object Object]
+    alert(testServ.a);     //12
+});
+
+</script>
+</head>
+<body>
+</body>
+</html>

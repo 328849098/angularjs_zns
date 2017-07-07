@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box1{color:#f00;}
+    </style>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<!-- style 的第一种写法 -->
+<div ng-init="str='width:200px;height:200px;background:#f00;';">
+    <div style="{{str}}">123</div>
+</div>
+
+<!-- style 的第二种写法 -->
+<div ng-init="json={width:'200px',height:'200px',background:'#ff0'};">
+    <div ng-style="json">123</div>
+</div>
+</body>
+</html>

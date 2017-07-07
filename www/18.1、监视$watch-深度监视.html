@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//$watch 监视
+//深度监视：监视里面内容。内容变了，显示。
+var app=angular.module('myApp',[]);
+app.controller('myCtrl',function ($scope) {
+    $scope.arr=[12,5,8];
+
+    //$watch(谁，干什么，深度监视)
+    $scope.$watch('arr',function () {
+        alert('变了');
+    },true);
+});
+</script>
+</head>
+<body>
+<input type="button" value="按钮" ng-click="arr.push(99);">
+{{arr}}
+
+</body>
+</html>

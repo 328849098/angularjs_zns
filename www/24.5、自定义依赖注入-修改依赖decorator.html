@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//官方：$scope,$http,$interval,$timeout
+/*自定义：
+1.factory 工厂    - 最简单
+*/
+
+//decorator  装饰   :   会修改原来的依赖
+var app=angular.module('myApp',[]);
+app.factory('test',function () {
+    return {
+        a:12,
+        b:5
+    };
+});
+app.decorator('test',function ($delegate) {    //$delegate 代理,指原来的test
+    $delegate.c=99;
+    return $delegate;       //返回修改后的test
+});
+app.controller('myCtrl',function ($scope,test) {
+    console.log('test',test);     //test Object {a: 12, b: 5, c: 99}
+});
+
+</script>
+</head>
+<body>
+</body>
+</html>

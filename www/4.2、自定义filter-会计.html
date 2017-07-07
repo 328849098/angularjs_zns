@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//filter
+var app=angular.module('myApp',[]);
+app.filter('my_price',function () {
+    return function (input) {
+        if(input<0){
+            return '('+(-input)+')';
+        }else{
+            return input;
+        }
+    }
+});
+app.controller('myCtrl',function ($scope) {
+    $scope.arr=[
+        {name:'路由器',count:5,price:-35},
+        {name:'卖外卖',count:3,price:15},
+        {name:'桌子',count:8,price:-150},
+    ];
+});
+</script>
+</head>
+<body>
+<ul>
+    <li ng-repeat="data in arr">商品：{{data.name}},金额：{{data.count*data.price|my_price}}</li>
+</ul>
+</body>
+</html>

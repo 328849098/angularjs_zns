@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+/*
+ 数据共享 -- 多个controller之间
+ 1.父子controller:
+        $scope能继承 - 复制了$scope
+        不能叫同步，只是复制
+
+ 消息机制（事件）:
+         $scope.$emit('名字',数据);      触发
+         $scope.$on('名字',数据);        接收
+ 2.无关controller
+*/
+var app=angular.module('myApp',[]);
+app.controller('con1',function ($scope,$timeout) {
+    $scope.a=12;
+
+    $timeout(function () {
+        alert('父集'+$scope.a);      //父集12
+    },50);
+});
+app.controller('con2',function ($scope) {
+    $scope.a++;
+    alert('子集'+$scope.a);         //子集13
+});
+
+</script>
+</head>
+<body>
+<div ng-controller="con1">
+    <div ng-controller="con2"></div>
+</div>
+</body>
+</html>

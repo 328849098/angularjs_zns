@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="jianshu" ng-controller="index_m">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script src="angular-route.js"></script>
+<script src="controllers/app.js"></script>
+<script>
+/*
+接口使用说明
+文章列表：    类别id：categoryid    分页：page
+文章内容：
+*/
+
+
+</script>
+</head>
+<body>
+<div ng-bind-html="a|showAsHtml"></div>
+<!-- 分类列表 begin -->
+<div>
+    <ul>
+        <li ng-repeat="item in categoryList" class="{{(item.categoryId==categoryNow)?'active':''}}">
+            <a href="javascript:;" ng-click="setCategoryNow(item.categoryId)">{{item.name}}</a>
+        </li>
+    </ul>
+</div>
+<!-- 分类列表 end -->
+
+<!-- 文章列表 begin -->
+<div>
+    <ul>
+        <li ng-repeat="item in menuList">
+            <a href="article.html?id={{item.articleId}}" ng-bind-html="item.title|showAsHtml"></a>
+        </li>
+    </ul>
+</div>
+<!-- 文章列表 end -->
+</body>
+</html>

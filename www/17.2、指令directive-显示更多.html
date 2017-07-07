@@ -1,0 +1,47 @@
+<!doctype html>
+<html ng-app='myApp' ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+<script src="angular.min.js"></script>
+<style>
+.more{width:300px;height:90px;line-height:30px;overflow:hidden;border:1px solid #000;}
+.more2{width:300px;line-height:30px;overflow:hidden;border:1px solid #000;}
+</style>
+<script>
+//directive 指令/自定义组件/重用
+//指令出现在哪，内容就在哪
+
+//标签   <ng-transclude></ng-transclude>
+//属性   <span ng-transclude></span>
+var app=angular.module('myApp',[]);
+app.directive('showMore',function () {
+    var json={
+        //replace:true,
+        restrict:'E',    //EACM:元素、属性、class、注释.默认EA。
+        template:'<div class="{{show?\'more2\':\'more\'}}">' +
+        '<a href="javascript:;" ng-click="show=!show">+显示更多</a>' +
+        '<ng-transclude></ng-transclude>' +       //包裹、嵌入，占位符
+        '</div>',
+        transclude:true
+    };
+    return json;
+});
+app.controller('myCtrl',function ($scope) {
+    $scope.show=false;
+})
+</script>
+</head>
+
+<body>
+<show_more>
+    从创立之初，百度便将“让人们最平等便捷地获取信息，找到所求”作为自己的使命，成立以来，公司秉承“用
+    户至上”的理念，不断坚持技术创新，致力于为用户提供“简单可依赖”的互联网搜索产品及服务，其中包括:以网络搜索为主的功能性搜索;以贴吧为主的社区搜索，针对各区域、行业所需的垂直搜索;以及门户频道、IM等，全面覆盖了中文网络世界所有的搜索需求。根据第三方权威数据，在中国，百度PC端和移动端市场份额总量达73.5%，覆盖了中国97.5%的网民，拥有6亿用户，日均响应搜索60亿次。
+    在面对用户的搜索产品不断丰富的同时，百度还创新性地推出了基于搜索的营销推广服务，并成为最受企业青睐的互联网营销推广平台。目前，中国已有数十万家企业使用了百度的搜索推广服务，不断提升着企业自身的品牌及运营效率。
+    为推动中国数百万中小网站的发展，百度借助超大流量的平台优势，联合所有优质的各类网站，建立了世界上最大的网络联盟，使各类企业的搜索推广、品牌营销的价值、覆盖面均大面积提升。与此同时，各网站也在联盟大家庭的互助下，获得最大的生存与发展机会。
+    百度大厦
+    百度大厦
+    移动互联网时代来临，百度在业界率先实现移动化转型，迎来更为广阔的发展机遇。通过开放地连接传统行业的3600行，百度从“连接人和信息”延伸到“连接人和服务”，让网民直接通过百度移动产品获得服务。目前，百度正通过持续的商业模式和产品、技术创新，推动金融、医疗、教育、汽车、生活服务等实体经济的各行业与互联网深度融合发展，为推动经济创新发展，转变经济发展方式发挥积极作用。
+</show_more>
+</body>
+</html>

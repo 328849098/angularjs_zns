@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//
+var app=angular.module('myApp',[]);
+app.controller('myCtrl',function ($scope) {
+    $scope.arr=[12,5,8];
+});
+</script>
+</head>
+<body>
+<!-- $index:默认的下标 -->
+<div ng-repeat="v in arr">{{$index}},{{v}}</div>
+
+</body>
+</html>

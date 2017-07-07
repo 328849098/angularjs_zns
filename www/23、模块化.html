@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script>
+//模块化 重用：1.按需加载 动态加载  2.封装 隔离  3.依赖
+//定义：var app=angular.module('名字',[依赖模块]);
+//  app.controller
+//  app.filter
+//  app.directive
+//使用：ng-app="名字"
+angular.module('mod1',[]).controller('con1',function ($scope) {
+    $scope.a=12;
+}).filter('myFilter',function () {
+    return function (input) {
+        return input+20;
+    }
+});
+angular.module('mod2',[]).controller('con2',function ($scope) {
+    $scope.b=5;
+});
+angular.module('mod3',['mod1','mod2']);     //模块化
+
+</script>
+</head>
+<body ng-app="mod3">
+<div ng-controller="con1">{{a|myFilter}}</div>
+<div ng-controller="con2">{{b|myFilter}}</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="angular.min.js"></script>
+<script src="angular-route.js"></script>
+<script src="controllers/user.js"></script>
+<script src="controllers/artice.js"></script>
+<script>
+/*
+resolve
+ resolve:{
+     delay:function ($q) {
+         var delay=$q.defer();   //生成对象
+         delay.resolve();        //resolve执行
+         return delay.promise;
+     }
+ }
+
+
+ promise.then().then().then(); 请求序列化
+ 1.请求数据
+ 2.过滤
+ 3.展现
+*/
+//第三种引用视图：script(type、id)     - 优先页面之内
+var app=angular.module('myApp',['ngRoute','userMod','articeMod']);
+app.config(function ($routeProvider) {    //配置
+    //alert($routeProvider);    //[object Object]
+    $routeProvider
+        .when(
+            '/user',
+            {
+                templateUrl:'views/user.html',  //显示内容 视图
+                controller:'userController'      //配置controller
+            }
+        )
+        .when(
+            '/artice',
+            {
+                templateUrl:'views/artice.html',
+                controller:'articeController',
+                resolve:{                       //延迟
+                    delay:function ($q) {
+                        var delay=$q.defer();   //生成对象
+
+                        setTimeout(function () {
+                            delay.resolve();   //resolve执行
+                        },3000);
+                        //$http.get(),setTimeout为模拟
+
+                        return delay.promise;
+                    }
+                }
+            }
+        )
+        .when(
+            '/setting',
+            {
+                templateUrl:'setting.html'   //第三种引用视图：script(type、id)
+            }
+        );
+});
+
+</script>
+</head>
+<body>
+<a href="#/user">用户中心</a>
+<a href="#/artice">文章列表</a>
+<a href="#/setting">配置信息</a>
+<ng-view></ng-view>
+
+<script type="text/ng-template" id="setting.html">
+    <ul>
+        <li>aaa</li>
+    </ul>
+</script>
+</body>
+</html>
